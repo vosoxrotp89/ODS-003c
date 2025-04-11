@@ -1,0 +1,46 @@
+{ // Register Doctor
+
+    curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John X",
+    "email": "doctor@gmail.com",
+    "password": "doctor",
+    "role": "doctor"
+  }'
+
+}
+{ // Register Patient
+
+    curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Y",
+    "email": "user@y",
+    "password": "usery",
+    "role": "Patient"
+  }'
+
+}
+{ // Login
+
+    curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "admin@y",
+    "password": "adminy"
+  }'
+
+}
+
+{
+  curl -X GET http://localhost:5000/api/admin/dashboard \
+  -H "Authorization: Bearer <>"
+
+}
+
+cd online-doctor-system
+cd backend
+cd frontend
+
+frontend/src/.js
