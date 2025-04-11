@@ -15,9 +15,9 @@
     curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "John Y",
-    "email": "user@y",
-    "password": "usery",
+    "name": "delete user",
+    "email": "delete@y",
+    "password": "deletey",
     "role": "Patient"
   }'
 
@@ -39,8 +39,32 @@
 
 }
 
-cd online-doctor-system
-cd backend
-cd frontend
+cd online-doctor-system/backend
+cd online-doctor-system/frontend
 
 frontend/src/.js
+this is current code modify it as per need and give me final code
+
+//setup 
+npm install
+npm install react-router-dom @reduxjs/toolkit react-redux
+npm install express mongoose dotenv cors bcryptjs jsonwebtoken
+npm install --save-dev nodemon
+
+admin{ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Zjg5NGM1NjNhZWMyODBjYTI2ZmFjNCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0NDM2NTc5OCwiZXhwIjoxNzQ0MzY5Mzk4fQ.CyfnT0-DHBKkeSf18sk04gik0f11WeKSa5MfM_pvGHA }
+doctor{ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Zjg5NTU5NjNhZWMyODBjYTI2ZmFjZCIsInJvbGUiOiJEb2N0b3IiLCJpYXQiOjE3NDQzNjU0NzUsImV4cCI6MTc0NDM2OTA3NX0.ieYSrfLKHzPx8lJUvB0KZ2o2AKYU2Dvy0tPT80yp59M }
+patient{ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Zjg5NWI2NjNhZWMyODBjYTI2ZmFkMiIsInJvbGUiOiJQYXRpZW50IiwiaWF0IjoxNzQ0MzY1NTE4LCJleHAiOjE3NDQzNjkxMTh9.B-6ufEY5dFyxFb5YkzHQtdvqPrYLtVpxjhkRJ8jdl8Q }
+
+{@vosoxrotp89 ➜ /workspaces/ODS-003c/online-doctor-system/backend $ curl -X POST http://localhost:5000/api/auth/register \
+>   -H "Content-Type: application/json" \
+>   -d '{
+>     "name": "delete user",
+>     "email": "delete@y",
+>     "password": "deletey",
+>     "role": "Patient"
+>   }'
+{
+  "message":"User registered successfully","user":{"name":"delete user","email":"delete@y",
+"password":"$2a$10$pUQyBUW.QRIRvVzwHx0y9ub3JMh4JfIQaa89dLdUdGsRT2iS7SCBO","role":"Patient","isBlocked":false,
+"_id":"67f8e813db7eb383922845fb","createdAt":"2025-04-11T09:59:47.588Z","updatedAt":"2025-04-11T09:59:47.588Z","__v":0}}
+}

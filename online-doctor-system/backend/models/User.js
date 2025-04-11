@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema(
       enum: ["Patient", "Doctor", "Admin"],
       default: "Patient",
     },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

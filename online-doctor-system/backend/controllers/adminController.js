@@ -33,7 +33,20 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-// GET /api/admin/cards — list all submitted cards
+exports.getUsersByRole = async (req, res) => {
+  try {
+    const role = req.params.role;
+    if (!["Doctor", "Patient"].includes(role)) {
+      return res.status(400).json({ message: "Invalid role" });
+    }
+
+    const users = await User.find({ role }).select("-password");
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch users by role", error });
+  }
+};
+
 exports.getAllCards = async (req, res) => {
   try {
     const cards = await Card.find().populate("user", "name email role");
@@ -44,7 +57,6 @@ exports.getAllCards = async (req, res) => {
   }
 };
 
-// PATCH /api/admin/cards/:id/approve
 exports.approveCard = async (req, res) => {
   try {
     const card = await Card.findById(req.params.id);
@@ -62,17 +74,25 @@ exports.approveCard = async (req, res) => {
   }
 };
 
-// GET /api/admin/users/:role — filter users by role (Doctor/Patient)
-exports.getUsersByRole = async (req, res) => {
+exports.toggleBlockUser = async (req, res) => {
   try {
-    const role = req.params.role;
-    if (!["Doctor", "Patient"].includes(role)) {
-      return res.status(400).json({ message: "Invalid role" });
+    const user = await User.findById(req.params.id);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    // Prevent blocking self or other Admins
+    if (user._id.toString() === req.user.id) {
+      return res.status(400).json({ message: "You cannot block yourself" });
+    }
+    if (user.role === "Admin") {
+      return res.status(403).json({ message: "Cannot block another Admin" });
     }
 
-    const users = await User.find({ role }).select("-password");
-    res.json(users);
+    user.isBlocked = !user.isBlocked;
+    await user.save();
+
+    res.status(200).json({ message: `User has been ${user.isBlocked ? "blocked" : "unblocked"}` });
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch users by role", error });
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
